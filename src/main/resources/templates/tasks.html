@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+</head>
+<body>
+<h1>Ежедневник</h1>
+<h2>Просмотр задач</h2>
+
+<table>
+  <tr>
+    <th>Имя задачи</th>
+    <th>Статус задачи</th>
+    <th>Удалить</th>
+    <th>Обновить</th>
+  </tr>
+  <tr th:each="t: ${tasks}" >
+    <td th:text="${t.name}"></td>
+    <td th:text="${t.status}"></td>
+    <td><a th:href="@{task-delete/{id}(id=${t.id})}">Удалить</a></td>
+    <td><a th:href="@{task-update/{id}(id=${t.id})}">Обновить</a></td>
+  </tr>
+</table>
+
+<h2>Добавить задачу</h2>
+<form action="/tasks" method="post">
+  Имя: <input type="text" name="name"><br />
+  Статус:
+  <select name="status">
+    <option th:each="status : ${T(ru.gb.HomeWork4.models.Status).values()}"
+            th:value="${status}"
+            th:text="${status}">
+    </option>
+  </select>
+  <button type="submit">Добавить задачу</button>
+</form>
+</body>
+</html>

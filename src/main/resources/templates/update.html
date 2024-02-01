@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+</head>
+<body>
+<h1>Ежедневник</h1>
+<h2>Обновить задачу</h2>
+<form action="/task-update" method="post" th:object="${task}">
+  Имя: <input type="text" name="name" th:value="*{name}"><br />
+  Статус:
+  <select name="status">
+    <option th:each="status : ${T(ru.gb.HomeWork4.models.Status).values()}"
+            th:value="${status}"
+            th:text="${status}">
+    </option>
+  </select>
+  <input type="number" name="id" th:value="*{id}">
+  <button type="submit">Обновить задачу</button>
+</form>
+</body>
+</html>
